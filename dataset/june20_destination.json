@@ -1,0 +1,20 @@
+{
+	"name": "june20_destination",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "june20_dynamic_linkeddatset",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "output",
+				"fileSystem": "june20container"
+			}
+		},
+		"schema": {}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

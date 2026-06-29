@@ -1,0 +1,22 @@
+{
+	"name": "source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sourceDB",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"input": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "seekhoschema",
+			"table": "info"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

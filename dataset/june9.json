@@ -1,0 +1,36 @@
+{
+	"name": "june9",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Source",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"storageaccount": "june4storageaccount"
+			}
+		},
+		"parameters": {
+			"file_name": {
+				"type": "string",
+				"defaultValue": "customer.txt"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().file_name",
+					"type": "Expression"
+				},
+				"fileSystem": "input"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

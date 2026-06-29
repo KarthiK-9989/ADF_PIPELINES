@@ -1,0 +1,95 @@
+{
+	"name": "dynamic_data_flow",
+	"properties": {
+		"activities": [
+			{
+				"name": "Data flow1",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflow4",
+						"type": "DataFlowReference",
+						"parameters": {
+							"src_file_name": "$src_file_name",
+							"sink_container_name": "$sink_container_name",
+							"sink_folder_name": "$sink_folder_name",
+							"src_container_name": {
+								"value": "'@{pipeline().parameters.src_container_name}'",
+								"type": "Expression"
+							},
+							"src_folder_name": {
+								"value": "'@{pipeline().parameters.src_folder_name}'",
+								"type": "Expression"
+							}
+						},
+						"datasetParameters": {
+							"source1": {
+								"src_container_name": {
+									"value": "@pipeline().parameters.src_container_name",
+									"type": "Expression"
+								},
+								"src_foldername": {
+									"value": "@pipeline().parameters.src_folder_name",
+									"type": "Expression"
+								},
+								"src_file_name": {
+									"value": "@pipeline().parameters.src_file_name",
+									"type": "Expression"
+								}
+							},
+							"sink1": {
+								"sink_container_name": {
+									"value": "@pipeline().parameters.sink_container_name",
+									"type": "Expression"
+								},
+								"sink_folder_name": {
+									"value": "@pipeline().parameters.sink_folder_name",
+									"type": "Expression"
+								}
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"parameters": {
+			"src_container_name": {
+				"type": "string",
+				"defaultValue": "input"
+			},
+			"src_folder_name": {
+				"type": "string",
+				"defaultValue": "source"
+			},
+			"src_file_name": {
+				"type": "string",
+				"defaultValue": "customer.txt"
+			},
+			"sink_container_name": {
+				"type": "string",
+				"defaultValue": "input"
+			},
+			"sink_folder_name": {
+				"type": "string",
+				"defaultValue": "dataflow_processed"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-06-11T02:09:34Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,21 @@
+{
+	"name": "june20_source_Dataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "june20_dynamic_linkeddatset",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "students.json",
+				"folderPath": "input",
+				"fileSystem": "june20container"
+			}
+		},
+		"schema": {}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

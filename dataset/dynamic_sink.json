@@ -1,0 +1,41 @@
+{
+	"name": "dynamic_sink",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Adls_Dynamic_LinkedService",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"storage_account_name": "june4storageaccount"
+			}
+		},
+		"parameters": {
+			"sink_container_name": {
+				"type": "string"
+			},
+			"sink_folder_name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@dataset().sink_folder_name",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().sink_container_name",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,52 @@
+{
+	"name": "adls_dynamic_dataflow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "adls_gen2_dynamic_source_datset",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "adls_gen2_dynamic_sink_dataser",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "rank1"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     src_container_name as string,",
+				"     src_folder_name as string,",
+				"     src_file_name as string,",
+				"     sink_conatiner_name as string,",
+				"     sink_folder_name as string",
+				"}",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 rank(asc($src_file_name, true),",
+				"     output(rank as long)) ~> rank1",
+				"rank1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}

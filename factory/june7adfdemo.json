@@ -1,0 +1,15 @@
+{
+	"name": "june7adfdemo",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "eastus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "62cfd493-9852-4bcd-b2bf-777f76d6718f",
+		"tenantId": "b52abf39-e623-4246-aa76-9ef090bee77a"
+	}
+}

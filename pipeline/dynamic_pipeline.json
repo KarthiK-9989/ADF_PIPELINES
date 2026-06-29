@@ -1,0 +1,115 @@
+{
+	"name": "dynamic_pipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFileName": "*",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "dynamic_source",
+						"type": "DatasetReference",
+						"parameters": {
+							"src_container_name": {
+								"value": "@pipeline().parameters.src_container_name",
+								"type": "Expression"
+							},
+							"src_foldername": {
+								"value": "@pipeline().parameters.src_folder_name",
+								"type": "Expression"
+							},
+							"src_file_name": {
+								"value": "@pipeline().parameters.src_file_name",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "dynamic_sink",
+						"type": "DatasetReference",
+						"parameters": {
+							"sink_container_name": {
+								"value": "@pipeline().parameters.sink_container_name",
+								"type": "Expression"
+							},
+							"sink_folder_name": {
+								"value": "@pipeline().parameters.sink_folder_name",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"src_container_name": {
+				"type": "string",
+				"defaultValue": "input"
+			},
+			"src_file_name": {
+				"type": "string",
+				"defaultValue": "customer.txt"
+			},
+			"sink_container_name": {
+				"type": "string",
+				"defaultValue": "input"
+			},
+			"sink_folder_name": {
+				"type": "string",
+				"defaultValue": "processed"
+			},
+			"src_folder_name": {
+				"type": "string",
+				"defaultValue": "source"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-06-11T02:09:34Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

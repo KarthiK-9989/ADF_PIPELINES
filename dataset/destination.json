@@ -1,0 +1,17 @@
+{
+	"name": "destination",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "destinationdb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "seekhoschema",
+			"table": "edu"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
